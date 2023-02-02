@@ -1,6 +1,7 @@
 import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import { MovieCard } from '../Card';
@@ -30,7 +31,9 @@ export default function Popular() {
       responsive="true"
       infinite="true">
       {movies.map((movie) => (
-        <MovieCard id={movie.id} image={movie.poster_path} />
+        <Grid container spacing={2}>
+          <MovieCard id={movie.id} image={movie.poster_path} />
+        </Grid>
       ))}
     </Carousel>
   );

@@ -1,6 +1,7 @@
 import { Carousel } from '@trendyol-js/react-carousel';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import { MovieCard } from '../Card';
@@ -31,7 +32,9 @@ export default function LatestTV() {
       responsive="true"
       infinite="true">
       {series.map((serie) => (
-        <MovieCard id={serie.id} image={serie.poster_path} />
+        <Grid container spacing={2}>
+          <MovieCard id={serie.id} image={serie.poster_path} />
+        </Grid>
       ))}
     </Carousel>
   );

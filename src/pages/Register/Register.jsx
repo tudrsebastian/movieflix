@@ -9,7 +9,8 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -17,8 +18,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
+import { collection, addDoc } from 'firebase/firestore';
 import { validationSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
+import { db } from '../../firebase';
 
 const theme = createTheme();
 export default function Register() {
@@ -30,15 +33,24 @@ export default function Register() {
       password: ''
     },
     validationSchem: validationSchema,
-    onSubmit: (values) => {
-      signUp(values.email, values.password);
-      navigate('/');
+    onSubmit: async (values) => {
+      try {
+        signUp(values.email, values.password);
+        const docRef = await addDoc(collection(db, 'users'), {
+          email: values.email,
+          watchlist: []
+        });
+        console.log(docRef.id);
+        navigate('/');
+      } catch (error) {
+        console.error('Error adding document:', error);
+      }
     }
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ my: 23.5 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -96,7 +108,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2">
+                <Link underline="none" href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

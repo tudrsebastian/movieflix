@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import App from './App';
 import { Login, Register, Dashboard, Search, Series, Movies, Watchlist } from './pages';
 import './index.css';
-import { Navbar } from './components';
+import { Navbar, Footer } from './components';
 import { UserProvider } from './components/Context/UserContext';
 
 const router = createBrowserRouter([
@@ -61,6 +61,7 @@ function NavbarWrapper() {
     <div>
       <Navbar />
       <Outlet />
+      <Footer />
     </div>
   );
 }

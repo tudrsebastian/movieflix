@@ -64,7 +64,6 @@ function Navbar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -105,7 +104,7 @@ function Navbar() {
               }}>
               {routes.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Link href={page.link} textAlign="center">
+                  <Link href={page.link} underline="none" textAlign="center">
                     <Icon>{page.icon}</Icon>
                     <Button>{page.name}</Button>
                   </Link>
@@ -116,6 +115,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {routes.map((page) => (
               <Link
+                underline="none"
                 href={page.link}
                 key={page.name}
                 onClick={handleCloseNavMenu}
@@ -129,10 +129,10 @@ function Navbar() {
           </Box>
           {!currentUser ? (
             <div>
-              <Link href="/login" sx={{ color: 'white' }}>
+              <Link underline="none" href="/login" sx={{ color: 'white' }}>
                 <Button variant="primary">Login</Button>
               </Link>
-              <Link href="/register" sx={{ color: 'white' }}>
+              <Link underline="none" href="/register" sx={{ color: 'white' }}>
                 <Button variant="primary">SignUp</Button>
               </Link>
             </div>

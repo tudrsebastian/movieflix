@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { Grid } from '@mui/material';
 import { Carousel } from '@trendyol-js/react-carousel';
 import { useState, useEffect } from 'react';
 import { Loading } from '../Loading';
@@ -28,11 +29,14 @@ export default function Hero() {
       leftArrow={<ArrowCircleLeftIcon sx={{ color: 'white', my: margins }} />}
       rightArrow={<ArrowCircleRightIcon sx={{ color: 'white', my: margins }} />}
       show={display}
-      swiping="true "
+      swiping="true"
+      swipeOn={2}
       responsive="true"
       infinite="true">
       {data.map((movie) => (
-        <MovieCard id={movie.id} image={movie.poster_path} />
+        <Grid container spacing={2}>
+          <MovieCard id={movie.id} image={movie.poster_path} />
+        </Grid>
       ))}
     </Carousel>
   );

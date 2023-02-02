@@ -7,7 +7,8 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -15,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
+
 import { validationSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
 
@@ -38,7 +40,7 @@ export default function Login() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ my: 22.35 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -91,13 +93,13 @@ export default function Login() {
             </Button>
 
             <Grid item xs>
-              <Link to="/" variant="body2">
+              <Link underline="none" href="/" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid container>
               <Grid item>
-                <Link to="/register" variant="body2">
+                <Link underline="none" href="/register" variant="body2">
                   Don`t have an account? Sign Up
                 </Link>
               </Grid>

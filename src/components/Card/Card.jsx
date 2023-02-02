@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 
 export default function MovieCard({ image, id }) {
   const [width, setWidth] = useState(540);
-  const [cardHeight, setCardHeight] = useState(320);
+  const [cardHeight, setCardHeight] = useState(340);
 
   useEffect(() => {
     if (window.innerWidth <= 720) {
@@ -33,7 +33,7 @@ export default function MovieCard({ image, id }) {
       }}>
       <CardMedia
         component="img"
-        sx={{ objectFit: 'full', height: cardHeight, px: 1, background: '#2E3B55' }}
+        sx={{ objectFit: 'full', height: cardHeight, background: '#2E3B55' }}
         image={`https://image.tmdb.org/t/p/w500/${image}`}
         alt="movie"
       />
