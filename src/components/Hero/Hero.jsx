@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/no-extraneous-dependencies */
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Grid } from '@mui/material';
 import { Carousel } from '@trendyol-js/react-carousel';
 import { useState, useEffect } from 'react';
@@ -16,21 +17,22 @@ export default function Hero() {
   const [margins, setMargins] = useState(20);
   useEffect(() => {
     if (window.innerWidth <= 720) {
-      setDisplay(3);
+      setDisplay(2.5);
       setMargins(8);
     } else if (window.innerWidth <= 1281) {
-      setDisplay(4.5);
+      setDisplay(3.5);
       setMargins(20);
     }
   }, []);
   if (!data) return <Loading />;
   return (
     <Carousel
-      leftArrow={<ArrowCircleLeftIcon sx={{ color: 'white', my: margins }} />}
-      rightArrow={<ArrowCircleRightIcon sx={{ color: 'white', my: margins }} />}
+      leftArrow={<ChevronLeftIcon sx={{ color: 'white', my: margins }} />}
+      rightArrow={<ChevronRightIcon sx={{ color: 'white', my: margins }} />}
       show={display}
       swiping="true"
       swipeOn={2}
+      slide={2}
       responsive="true"
       infinite="true">
       {data.map((movie) => (

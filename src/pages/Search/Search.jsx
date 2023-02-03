@@ -1,9 +1,10 @@
-import { Card, CardMedia, Container, TextField, Grid } from '@mui/material';
+import { Container, TextField, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MovieCard } from '../../components';
 
 export default function Search() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('Avatar');
   const [list, setList] = useState([]);
   console.log(list);
   console.log(query);
@@ -23,7 +24,7 @@ export default function Search() {
     searchResult();
   }, [query]);
   return (
-    <Container maxWidth="sm" sx={{ mb: 24 }}>
+    <Container maxWidth="sm">
       <TextField
         id="outlined-basic"
         label="Search"
@@ -40,20 +41,7 @@ export default function Search() {
           {list.map((item) => {
             return (
               <Grid item xs={4}>
-                <Card
-                  key={item.id}
-                  sx={{
-                    maxWidth: 350,
-                    my: 2,
-                    transition: 'transform 0.15s ease-in-out',
-                    '&:hover': { transform: 'scale3d(1.05, 1.05, 1)' }
-                  }}>
-                  <CardMedia
-                    component="img"
-                    image={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                    alt="movie"
-                  />
-                </Card>
+                <MovieCard id={item.id} image={item.poster_path} />
               </Grid>
             );
           })}

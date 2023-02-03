@@ -1,8 +1,12 @@
+import { Container } from '@mui/material';
+import { Toprated, Popular, Latest } from '../../components';
+
 export default function Movies() {
   return (
-    <div>
-      <h2>Movie page</h2>
-      <p>under construction</p>
-    </div>
+    <Container maxWidth="350" sx={{ mt: 4 }}>
+      <Toprated />
+      <Popular />
+      <Latest />
+    </Container>
   );
 }

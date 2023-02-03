@@ -1,4 +1,5 @@
 import './App.css';
+import { Container } from '@mui/material';
 import { useAuth } from './components/Context/UserContext';
 import { Hero, Latest, LatestTV, Popular, PopularTV, Toprated, TopratedTV } from './components';
 
@@ -6,7 +7,7 @@ function App() {
   const { currentUser } = useAuth();
   console.log(currentUser);
   return (
-    <div className="App">
+    <Container maxWidth="350" className="App" sx={{ mt: 4 }}>
       <Hero />
       <h3>Latest</h3>
       <Latest />
@@ -20,7 +21,7 @@ function App() {
       <TopratedTV />
       <h3>Popular TV shows</h3>
       <PopularTV />
-    </div>
+    </Container>
   );
 }
 
