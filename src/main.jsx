@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import App from './App';
-import { Login, Register, Dashboard, Search, Series, Movies, Watchlist } from './pages';
+import { Login, Register, Dashboard, Search, Series, Movies, Watchlist, Details } from './pages';
 import './index.css';
 import { Navbar, Footer } from './components';
 import { UserProvider } from './components/Context/UserContext';
@@ -44,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/movies',
         element: <Movies />
+      },
+      {
+        path: '/:id',
+        element: <Details />
       }
     ]
   }

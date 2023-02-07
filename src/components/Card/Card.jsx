@@ -4,11 +4,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
+import { useNavigate } from 'react-router-dom';
 import CardMedia from '@mui/material/CardMedia';
 
 export default function MovieCard({ image, id }) {
   const [width, setWidth] = useState(540);
   const [cardHeight, setCardHeight] = useState(340);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (window.innerWidth <= 720) {
@@ -22,8 +24,12 @@ export default function MovieCard({ image, id }) {
       setWidth(25);
     }
   }, []);
+  const onClick = () => {
+    navigate(`/:${id}`);
+  };
   return (
     <Card
+      onClick={onClick}
       key={id}
       sx={{
         maxWidth: width,
