@@ -33,7 +33,9 @@ export default function PopularTV() {
       infinite="true">
       {series.map((serie) => (
         <Grid container spacing={2}>
-          <MovieCard id={serie.id} image={serie.poster_path} />
+          <Grid item xs={11}>
+            <MovieCard id={serie.id} image={serie.poster_path} />
+          </Grid>
         </Grid>
       ))}
     </Carousel>

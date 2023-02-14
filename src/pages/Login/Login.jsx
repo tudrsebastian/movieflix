@@ -4,8 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
@@ -55,7 +54,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box onSubmit={formik.handleSubmit} component="form" noValidate sx={{ mt: 1 }}>
+          <Box onSubmit={formik.handleSubmit} component="form" sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               fullWidth
@@ -84,10 +83,7 @@ export default function Login() {
               helperText={formik.touched.password && formik.errors.password}
               onBlur={formik.handleBlur}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>

@@ -6,8 +6,7 @@ import { MovieCard } from '../../components';
 export default function Search() {
   const [query, setQuery] = useState('Avatar');
   const [list, setList] = useState([]);
-  console.log(list);
-  console.log(query);
+
   useEffect(() => {
     const searchResult = async () => {
       try {

@@ -56,8 +56,6 @@ function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { signOut, currentUser } = useAuth();
-  console.log(currentUser);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -138,11 +136,13 @@ function Navbar() {
             </div>
           ) : (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
+              <Box sx={{ display: 'flex', gap: 4 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
               <Menu
                 sx={{ mt: '45px' }}
                 id="menu-appbar"

@@ -34,7 +34,9 @@ export default function Latest() {
       infinite="true">
       {movies.map((movie) => (
         <Grid container spacing={2}>
-          <MovieCard id={movie.id} image={movie.poster_path} />
+          <Grid item xs={11}>
+            <MovieCard id={movie.id} image={movie.poster_path} />
+          </Grid>
         </Grid>
       ))}
     </Carousel>

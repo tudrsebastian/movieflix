@@ -20,7 +20,7 @@ export default function Hero() {
       setDisplay(2.5);
       setMargins(8);
     } else if (window.innerWidth <= 1281) {
-      setDisplay(3.5);
+      setDisplay(5.5);
       setMargins(20);
     }
   }, []);
@@ -37,7 +37,9 @@ export default function Hero() {
       infinite="true">
       {data.map((movie) => (
         <Grid container spacing={2}>
-          <MovieCard id={movie.id} image={movie.poster_path} />
+          <Grid item xs={11}>
+            <MovieCard id={movie.id} image={movie.poster_path} />
+          </Grid>
         </Grid>
       ))}
     </Carousel>

@@ -6,8 +6,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
@@ -18,10 +16,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
-import { collection, addDoc } from 'firebase/firestore';
 import { validationSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
-import { db } from '../../firebase';
 
 const theme = createTheme();
 export default function Register() {
@@ -34,23 +30,15 @@ export default function Register() {
     },
     validationSchem: validationSchema,
     onSubmit: async (values) => {
-      try {
-        signUp(values.email, values.password);
-        const docRef = await addDoc(collection(db, 'users'), {
-          email: values.email,
-          watchlist: []
-        });
-        console.log(docRef.id);
-        navigate('/');
-      } catch (error) {
-        console.error('Error adding document:', error);
-      }
+      signUp(values.email, values.password);
+
+      navigate('/dashboard');
     }
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ my: 23.5 }}>
+      <Container component="main" maxWidth="xs" sx={{ my: 25.5 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -65,7 +53,8 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box onSubmit={formik.handleSubmit} component="form" noValidate sx={{ mt: 3 }}>
+
+          <Box onSubmit={formik.handleSubmit} component="form" sx={{ mt: 5 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -96,14 +85,8 @@ export default function Register() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 3.9 }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
