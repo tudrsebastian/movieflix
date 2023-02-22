@@ -34,17 +34,19 @@ export default function Watchlist() {
   };
   return (
     <Container>
-      <Typography sx={{ fontSize: 35, textAlign: 'center', my: 17.5 }}>
+      <Typography color="white" sx={{ fontSize: 35, textAlign: 'center', my: 17.5 }}>
         {' '}
         Welcome to your Watchlist!
       </Typography>
       {watchList !== null && watchList.watchlist.length === 0 ? (
         <Grid container spacing={2} sx={{ my: 30 }}>
           <Grid item xs={12}>
-            <Typography sx={{ fontSize: 25 }}>No movies added Yet!</Typography>
+            <Typography color="white" sx={{ fontSize: 25 }}>
+              No movies added Yet!
+            </Typography>
           </Grid>
           <Grid item>
-            <Typography sx={{ fontSize: 25 }}>
+            <Typography color="white" sx={{ fontSize: 25 }}>
               When you will add movies to watchlist they will appear here!
             </Typography>
           </Grid>

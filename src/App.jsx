@@ -1,5 +1,5 @@
 import './App.css';
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useAuth } from './components/Context/UserContext';
 import { Hero, Latest, LatestTV, Popular, PopularTV, Toprated, TopratedTV } from './components';
 
@@ -9,17 +9,29 @@ function App() {
   return (
     <Container maxWidth="350" className="App" sx={{ mt: 4 }}>
       <Hero />
-      <h3>Latest</h3>
+      <Typography variant="h5" color="white" sx={{ ml: 5 }}>
+        Latest
+      </Typography>
       <Latest />
-      <h3>Top rated</h3>
+      <Typography color="white" variant="h5" sx={{ ml: 5 }}>
+        Top rated
+      </Typography>
       <Toprated />
-      <h3>Trending</h3>
+      <Typography variant="h5" color="white" sx={{ ml: 5 }}>
+        Trending
+      </Typography>
       <Popular />
-      <h3>Latest TV shows</h3>
+      <Typography variant="h5" color="white" sx={{ ml: 5 }}>
+        Latest TV shows
+      </Typography>
       <LatestTV />
-      <h3>Top rated TV shows</h3>
+      <Typography variant="h5" color="white" sx={{ ml: 5 }}>
+        Top rated TV shows
+      </Typography>
       <TopratedTV />
-      <h3>Popular TV shows</h3>
+      <Typography variant="h5" color="white" sx={{ ml: 5 }}>
+        Popular TV shows
+      </Typography>
       <PopularTV />
     </Container>
   );

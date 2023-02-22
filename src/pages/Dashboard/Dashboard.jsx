@@ -46,11 +46,13 @@ export default function Dashboard() {
   return (
     <Container maxWidth="xs" sx={{ my: 25 }}>
       {!currentUser?.displayName ? (
-        <Typography sx={{ my: 5 }}>
+        <Typography color="white" sx={{ my: 5 }}>
           Welcome! Before getting started please set a username first!It can't be changed!
         </Typography>
       ) : (
-        <Typography sx={{ mb: 15, ml: 3 }}>Dashboard</Typography>
+        <Typography variant="h4" color="white" sx={{ mb: 15, ml: 3 }}>
+          Dashboard
+        </Typography>
       )}
 
       {!currentUser?.displayName ? (
@@ -58,14 +60,14 @@ export default function Dashboard() {
           <InputLabel htmlFor="my-input">Username</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" />
           <FormHelperText id="my-helper-text">Please set a username</FormHelperText>
-          <Button onClick={onClick} variant="primary">
+          <Button onClick={onClick} variant="contained">
             Set username
           </Button>
         </FormControl>
       ) : (
         <Container>
-          <Typography>Username</Typography>
-          <Typography>{currentUser?.displayName}</Typography>
+          <Typography color="white">Username</Typography>
+          <Typography color="white">{currentUser?.displayName}</Typography>
         </Container>
       )}
 
@@ -74,7 +76,7 @@ export default function Dashboard() {
           <InputLabel htmlFor="my-input">New Password</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" />
           <FormHelperText id="my-helper-text">Reset Password</FormHelperText>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="contained">
             Set New Password
           </Button>
         </FormControl>
