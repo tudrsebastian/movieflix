@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { Button, Container, Grid } from '@mui/material';
+import { arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { Button, Container, Grid, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 import { useAuth } from '../../components/Context/UserContext';
 import { Loading, MovieCard } from '../../components';
 
 export default function Watchlist() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const [watchList, setWatchList] = useState(null);
   const getWatchlist = async () => {
     const docRef = doc(db, 'users', currentUser.uid);
@@ -19,29 +21,55 @@ export default function Watchlist() {
   };
   useEffect(() => {
     getWatchlist();
+    if (currentUser === null) {
+      navigate('/login');
+    }
   }, [currentUser]);
-  console.log(watchList);
-
+  const onClick = async (id) => {
+    const docRef = doc(db, 'users', currentUser.uid);
+    await updateDoc(docRef, {
+      watchlist: arrayRemove(id)
+    });
+    console.log('Clicked!', id);
+  };
   return (
     <Container>
-      <h3>Watch List!</h3>
-      {watchList === null ? (
-        <Container maxWidth="350" sx={{ ml: 90 }}>
-          <Loading />
-        </Container>
-      ) : (
-        <Container sx={{ mt: 5 }}>
-          <Grid container spacing={2}>
-            {watchList.watchlist.map((movie) => {
-              return (
-                <Grid item>
-                  <MovieCard id={movie.id} image={movie.poster_path} />
-                  <Button>Remove</Button>
-                  <Button>Watched</Button>
-                </Grid>
-              );
-            })}
+      <Typography sx={{ fontSize: 35, textAlign: 'center', my: 17.5 }}>
+        {' '}
+        Welcome to your Watchlist!
+      </Typography>
+      {watchList !== null && watchList.watchlist.length === 0 ? (
+        <Grid container spacing={2} sx={{ my: 30 }}>
+          <Grid item xs={12}>
+            <Typography sx={{ fontSize: 25 }}>No movies added Yet!</Typography>
           </Grid>
+          <Grid item>
+            <Typography sx={{ fontSize: 25 }}>
+              When you will add movies to watchlist they will appear here!
+            </Typography>
+          </Grid>
+        </Grid>
+      ) : (
+        <Container>
+          {watchList === null ? (
+            <Container maxWidth="350" sx={{ ml: 90 }}>
+              <Loading />
+            </Container>
+          ) : (
+            <Container sx={{ my: 5 }}>
+              <Grid container spacing={2}>
+                {watchList.watchlist.map((movie) => {
+                  return (
+                    <Grid item>
+                      <MovieCard id={movie.id} image={movie.poster_path} />
+                      <Button onClick={() => onClick(movie.id)}>Remove</Button>
+                      <Button>Watched</Button>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Container>
+          )}
         </Container>
       )}
     </Container>
