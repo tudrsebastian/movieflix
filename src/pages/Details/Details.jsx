@@ -12,12 +12,13 @@ export default function Details() {
   const [details, setDetails] = useState(null);
   const { id } = useParams();
   const { currentUser } = useAuth();
-  const docRef = doc(db, 'users', currentUser.uid);
+
   const movieId = id.slice(1);
   console.log(details);
 
   const onClick = async () => {
     try {
+      const docRef = doc(db, 'users', currentUser.uid);
       await updateDoc(docRef, {
         watchlist: arrayUnion(details)
       });
