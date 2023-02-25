@@ -52,15 +52,15 @@ export default function Details() {
           alt="poster"
         />
       </Box>
-      <Container sx={{ display: 'inline-flex', gap: 4, ml: 12 }}>
+      <Container sx={{ display: 'inline-flex', gap: 4, ml: 8.8 }}>
         <Typography sx={{ color: 'orange' }}>Votes {details.vote_average.toFixed(2)}/10</Typography>
         <Typography sx={{ color: 'white' }}>Year {details.release_date.slice(0, 4)}</Typography>
       </Container>
-      <Box sx={{ ml: 15, my: 2 }}>
-        <Typography sx={{ fontSize: 24, width: '50%', color: 'white' }}>{details.title}</Typography>
-        <Typography sx={{ width: '50%', color: 'white' }}>{details.overview}</Typography>
+      <Box sx={{ ml: 7, my: 2 }}>
+        <Typography sx={{ fontSize: 24, color: 'white' }}>{details.title}</Typography>
+        <Typography sx={{ color: 'white' }}>{details.overview}</Typography>
       </Box>
-      <Box sx={{ display: 'inline-flex', ml: 14 }}>
+      <Box sx={{ display: 'inline-flex', ml: 7, mb: 7 }}>
         <Button onClick={onClick}>Add to Watchlist</Button>
         <Button>
           <Link href={`${details.homepage}`} target="_blank" underline="none">

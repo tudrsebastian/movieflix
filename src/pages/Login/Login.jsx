@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 
+import { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
@@ -22,6 +23,7 @@ import { useAuth } from '../../components/Context/UserContext';
 const theme = createTheme();
 
 export default function Login() {
+  const [newError, setNewError] = useState();
   const navigate = useNavigate();
   const { login } = useAuth();
   const formik = useFormik({
@@ -32,9 +34,16 @@ export default function Login() {
       password: ''
     },
     validationSchema: valSchema,
-    onSubmit: (values) => {
-      login(values.email, values.password);
-      navigate('/');
+    onSubmit: async (values) => {
+      try {
+        await login(values.email, values.password);
+        navigate('/');
+      } catch (error) {
+        if (error) {
+          const code = Object.entries(error);
+          setNewError(code[0][1]);
+        }
+      }
     }
   });
   return (
@@ -55,39 +64,51 @@ export default function Login() {
             Sign in
           </Typography>
           <Box onSubmit={formik.handleSubmit} component="form" sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              onBlur={formik.handleBlur}
-            />
+            <Grid container spacing={2}>
+              <TextField
+                margin="normal"
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              {newError === 'auth/user-not-found' ? (
+                <Typography color="#DC143C">Account may not exist!</Typography>
+              ) : (
+                <Typography color="#2e3b55">.</Typography>
+              )}
 
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
-            </Button>
+              <TextField
+                margin="normal"
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+                onBlur={formik.handleBlur}
+              />
+              {newError === 'auth/wrong-password' ? (
+                <Typography color="#DC143C">Wrong password! Try again!</Typography>
+              ) : (
+                <Typography color="#2e3b55">.</Typography>
+              )}
 
+              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                Sign In
+              </Button>
+            </Grid>
             <Grid item xs>
               <Link underline="none" href="/" variant="body2">
                 Forgot password?

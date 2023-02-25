@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
@@ -19,6 +20,7 @@ import { valSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
 
 export default function Register() {
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
   const { signUp } = useAuth();
   const formik = useFormik({
@@ -27,9 +29,15 @@ export default function Register() {
       password: ''
     },
     validationSchema: valSchema,
-    onSubmit: (values) => {
-      signUp(values.email, values.password);
-      navigate('/dashboard');
+    onSubmit: async (values) => {
+      try {
+        await signUp(values.email, values.password);
+        navigate('/dashboard');
+      } catch (error) {
+        if (error) {
+          setIsError(true);
+        }
+      }
     }
   });
 
@@ -46,7 +54,7 @@ export default function Register() {
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" sx={{ my: 2 }}>
+        <Typography component="h1" variant="h5" sx={{ my: 1 }}>
           Sign up
         </Typography>
 
@@ -66,6 +74,15 @@ export default function Register() {
                 helperText={formik.touched.email && formik.errors.email}
               />
             </Grid>
+            {!isError ? (
+              <Grid item xs={2}>
+                <Typography color="#2e3b55">.</Typography>
+              </Grid>
+            ) : (
+              <Typography color="#DC143C">
+                Email is already in use! Please try a different email!
+              </Typography>
+            )}
             <Grid item xs={12}>
               <TextField
                 fullWidth
