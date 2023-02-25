@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/named
-export { default as validationSchema } from './validationSchema';
+export { default as valSchema } from './validationSchema';

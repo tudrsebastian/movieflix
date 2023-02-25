@@ -14,12 +14,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
-import { validationSchema } from '../../components';
+import { valSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
 
-const theme = createTheme();
 export default function Register() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
@@ -28,77 +26,73 @@ export default function Register() {
       email: '',
       password: ''
     },
-    validationSchem: validationSchema,
-    onSubmit: async (values) => {
+    validationSchema: valSchema,
+    onSubmit: (values) => {
       signUp(values.email, values.password);
-
       navigate('/dashboard');
     }
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ my: 25.5 }}>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+    <Container component="main" maxWidth="xs" sx={{ my: 26.5 }}>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5" sx={{ my: 2 }}>
+          Sign up
+        </Typography>
 
-          <Box onSubmit={formik.handleSubmit} component="form" sx={{ mt: 5 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.email && Boolean(formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  error={formik.touched.password && Boolean(formik.errors.password)}
-                  helperText={formik.touched.password && formik.errors.password}
-                  onBlur={formik.handleBlur}
-                  autoComplete="new-password"
-                />
-              </Grid>
+        <Box onSubmit={formik.handleSubmit} component="form" sx={{ mt: 1 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 3.9 }}>
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link underline="none" href="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.touched.password && Boolean(formik.errors.password)}
+                helperText={formik.touched.password && formik.errors.password}
+                onBlur={formik.handleBlur}
+              />
             </Grid>
-          </Box>
+          </Grid>
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 3.9 }}>
+            Sign Up
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link underline="none" href="/login" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

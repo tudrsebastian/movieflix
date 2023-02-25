@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 
-import { validationSchema } from '../../components';
+import { valSchema } from '../../components';
 import { useAuth } from '../../components/Context/UserContext';
 
 const theme = createTheme();
@@ -31,7 +31,7 @@ export default function Login() {
       email: '',
       password: ''
     },
-    validationSchem: validationSchema,
+    validationSchema: valSchema,
     onSubmit: (values) => {
       login(values.email, values.password);
       navigate('/');
