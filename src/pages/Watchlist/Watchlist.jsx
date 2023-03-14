@@ -27,10 +27,17 @@ export default function Watchlist() {
   }, [currentUser]);
   const onClick = async (id) => {
     const docRef = doc(db, 'users', currentUser.uid);
-    await updateDoc(docRef, {
-      watchlist: arrayRemove(id)
-    });
-    console.log('Clicked!', id);
+    try {
+      await updateDoc(docRef, {
+        watchlist: arrayRemove(watchList.watchlist.find((movie) => movie.id === id))
+      });
+      setWatchList((prev) => ({
+        ...prev,
+        watchlist: prev.watchlist.filter((movie) => movie.id !== id)
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container>
@@ -65,7 +72,6 @@ export default function Watchlist() {
                     <Grid item>
                       <MovieCard id={movie.id} image={movie.poster_path} />
                       <Button onClick={() => onClick(movie.id)}>Remove</Button>
-                      <Typography color="red">Not functional yet!</Typography>
                       <Button>Watched</Button>
                       <Typography color="red">Not functional yet!</Typography>
                     </Grid>
