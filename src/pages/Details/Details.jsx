@@ -80,7 +80,7 @@ export default function Details() {
           alt="poster"
         />
       </Box>
-      <Container sx={{ display: 'inline-flex', gap: 4, ml: 8.8 }}>
+      <Container sx={{ display: 'flex', gap: 4 }}>
         <Typography sx={{ color: 'orange' }}>Votes {details.vote_average.toFixed(2)}/10</Typography>
         <Typography sx={{ color: 'white' }}>Year {details.release_date.slice(0, 4)}</Typography>
       </Container>
