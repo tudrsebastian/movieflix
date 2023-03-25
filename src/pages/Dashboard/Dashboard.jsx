@@ -12,18 +12,23 @@ import {
   Button
 } from '@mui/material';
 import { doc, setDoc } from 'firebase/firestore';
-import { updateProfile } from 'firebase/auth';
+import { updatePassword, updateProfile } from 'firebase/auth';
 import { db } from '../../firebase';
 import { useAuth } from '../../components/Context/UserContext';
 
 export default function Dashboard() {
   const [username, setUsername] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   const onChange = (e) => {
     e.preventDefault();
     setUsername(e.target.value);
+  };
+  const onChangePass = (e) => {
+    e.preventDefault();
+    setNewPassword(e.target.value);
   };
   const onClick = (e) => {
     e.preventDefault();
@@ -42,6 +47,16 @@ export default function Dashboard() {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const onClickPass = async (e) => {
+    e.preventDefault();
+    try {
+      await updatePassword(currentUser, newPassword);
+      setNewPassword('');
+      console.log(newPassword);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container maxWidth="xs" sx={{ my: 25 }}>
@@ -72,11 +87,11 @@ export default function Dashboard() {
       )}
 
       <Box maxWidth="xs" sx={{ my: 10 }}>
-        <FormControl>
+        <FormControl onChange={onChangePass}>
           <InputLabel htmlFor="my-input">New Password</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" />
+          <Input type="password" id="my-input" aria-describedby="my-helper-text" />
           <FormHelperText id="my-helper-text">Reset Password</FormHelperText>
-          <Button type="submit" variant="contained">
+          <Button onClick={onClickPass} variant="contained">
             Set New Password
           </Button>
         </FormControl>

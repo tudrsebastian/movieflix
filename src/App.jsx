@@ -1,11 +1,8 @@
 import './App.css';
 import { Container, Typography } from '@mui/material';
-import { useAuth } from './components/Context/UserContext';
 import { Hero, Latest, LatestTV, Popular, PopularTV, Toprated, TopratedTV } from './components';
 
 function App() {
-  const { currentUser } = useAuth();
-  console.log(currentUser);
   return (
     <Container maxWidth="350" className="App" sx={{ mt: 4 }}>
       <Hero />

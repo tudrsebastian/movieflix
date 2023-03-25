@@ -72,8 +72,6 @@ export default function Watchlist() {
                     <Grid item>
                       <MovieCard id={movie.id} image={movie.poster_path} />
                       <Button onClick={() => onClick(movie.id)}>Remove</Button>
-                      <Button>Watched</Button>
-                      <Typography color="red">Not functional yet!</Typography>
                     </Grid>
                   );
                 })}
